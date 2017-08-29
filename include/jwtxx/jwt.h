@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JWTXX_JWT_H
+#define JWTXX_JWT_H
 
 /** @file jwt.h
  *  @brief Classes, constants and functions to work with JWT.
@@ -208,7 +209,7 @@ Validator aud(std::string audience) noexcept;
  */
 Validator sub(std::string subject) noexcept;
 
-}
+} // Validate namespace
 
 /** @class JWT
  *  @brief Main class to work with JWT
@@ -303,4 +304,6 @@ class JWT
         Pairs m_claims;
 };
 
-}
+} // JWTXX namespace
+
+#endif // JWTXX_JWT_H

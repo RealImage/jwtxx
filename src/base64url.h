@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JWTXX_BASE64URL_H
+#define JWTXX_BASE64URL_H
 
 #include <string>
 
@@ -131,5 +132,7 @@ Block decode(std::string data) noexcept
     return block.shrink(res);
 }
 
-}
-}
+} // Base64URL namespace
+} // JWTXX namespace
+
+#endif // JWTXX_BASE64URL_H

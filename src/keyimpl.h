@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JWTXX_KEYIMPL_H
+#define JWTXX_KEYIMPL_H
 
 #include "jwtxx/jwt.h"
 
@@ -22,4 +23,6 @@ struct Key::Impl
     virtual bool verify(const void* data, size_t size, const std::string& signature) const = 0;
 };
 
-}
+} // JWTXX namespace
+
+#endif // JWTXX_KEYIMPL_H

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JWTXX_IOS_H
+#define JWTXX_IOS_H
 
 /** @file ios.h
  *  @brief Stream input/output functions.
@@ -23,3 +24,5 @@ std::ostream& operator<<(std::ostream& stream, const Algorithm& alg)
 }
 
 }
+
+#endif // JWTXX_IOS_H
