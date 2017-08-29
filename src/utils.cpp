@@ -51,19 +51,16 @@ Utils::EVPKeyPtr readPublicKey(const std::string& src)
         return Utils::EVPKeyPtr(PEM_read_PUBKEY(fp.get(), nullptr, nullptr, nullptr));
 
     // src is key data
-    EVP_PKEY* key = nullptr;
 
-    unsigned char *decodedData = new unsigned char[src.size()];
+    unsigned char *t = (unsigned char *) malloc(src.size());
     EVP_DecodeBlock(decodedData, reinterpret_cast<const unsigned char*>(src.data()), src.size());
 
-    key = d2i_PUBKEY(NULL, (const unsigned char **) &decodedData, src.size());
+    Utils::EVPKeyPtr key(d2i_PUBKEY(NULL, (const unsigned char **) &t, src.size()));
 
-    delete [] decodedData;
-
-    if (key == nullptr)
+    if (key.get() == nullptr)
         throw JWTXX::Key::Error("Key = " + src + " is not valid " + sysError());
 
-    return Utils::EVPKeyPtr(key);
+    return key;
 }
 
 Utils::EVPKeyPtr readCert(const std::string& fileName)
