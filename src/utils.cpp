@@ -53,12 +53,12 @@ Utils::EVPKeyPtr readPublicKey(const std::string& src)
     // src is key data
     EVP_PKEY* key = nullptr;
 
-    unsigned char *t = new unsigned char[src.size()];
-    EVP_DecodeBlock(t, reinterpret_cast<const unsigned char*>(src.data()), src.size());
+    unsigned char *decodedData = new unsigned char[src.size()];
+    EVP_DecodeBlock(decodedData, reinterpret_cast<const unsigned char*>(src.data()), src.size());
 
-    key = d2i_PUBKEY(NULL, (const unsigned char **) &t, src.size());
+    key = d2i_PUBKEY(NULL, (const unsigned char **) &decodedData, src.size());
 
-    delete [] t;
+    delete [] decodedData;
 
     if (key == nullptr)
         throw JWTXX::Key::Error("Key = " + src + " is not valid " + sysError());
