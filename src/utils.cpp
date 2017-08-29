@@ -51,14 +51,14 @@ Utils::EVPKeyPtr readPublicKey(const std::string& src)
         return Utils::EVPKeyPtr(PEM_read_PUBKEY(fp.get(), nullptr, nullptr, nullptr));
 
     // src is key data
+    unsigned char *decodedData = new unsigned char [src.size()];
+    EVP_DecodeBlock(decodedData, reinterpret_cast<const unsigned char*>(src.data()), static_cast<int>(src.size()));
 
-    unsigned char *t = (unsigned char *) malloc(src.size());
-    EVP_DecodeBlock(decodedData, reinterpret_cast<const unsigned char*>(src.data()), src.size());
+    BIO* bio = BIO_new_mem_buf(decodedData, static_cast<int>(src.size()));
+    Utils::EVPKeyPtr key(d2i_PUBKEY_bio(bio, nullptr));
 
-    Utils::EVPKeyPtr key(d2i_PUBKEY(NULL, (const unsigned char **) &t, src.size()));
-
-    if (key.get() == nullptr)
-        throw JWTXX::Key::Error("Key = " + src + " is not valid " + sysError());
+    BIO_free(bio);
+    delete [] decodedData;
 
     return key;
 }
