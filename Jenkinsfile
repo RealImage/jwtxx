@@ -27,6 +27,19 @@ pipeline {
             }
         }
 
+        stage('Release build test') {
+            steps {
+                echo 'Release tests building..'
+                sh 'cd build; cmake --build . --config Release --target tests'
+            }
+        }
+
+        stage('Release run test') {
+            steps {
+                echo 'Release tests running ..'
+                sh 'cd build; ctest -VV -C Release'
+            }
+        }
         stage('Clean after release') {
             steps {
                 echo 'Cleaning'
@@ -45,6 +58,20 @@ pipeline {
             steps {
                 echo 'Debug building..'
                 sh 'cd build; cmake --build . --config Debug'
+            }
+        }
+
+        stage('Debug build test') {
+            steps {
+                echo 'Debug tests building..'
+                sh 'cd build; cmake --build . --config Debug --target tests'
+            }
+        }
+
+        stage('Debug run test') {
+            steps {
+                echo 'Debug tests running ..'
+                sh 'cd build; ctest -VV -C Debug'
             }
         }
     }
