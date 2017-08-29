@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JWTXX_UTILS_H
+#define JWTXX_UTILS_H
 
 #include "jwtxx/jwt.h"
 
@@ -39,5 +40,7 @@ typedef std::tuple<std::string, std::string, std::string> Triple;
 
 Triple split(const std::string& token);
 
-}
-}
+} // Utils namespace
+} // JWTXX namespace
+
+#endif // JWTXX_UTILS_H

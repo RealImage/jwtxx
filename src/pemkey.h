@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JWTXX_PEMKEY_H
+#define JWTXX_PEMKEY_H
 
 #include "keyimpl.h"
 #include "utils.h"
@@ -64,5 +65,7 @@ class PEM : public Key::Impl
         }
 };
 
-}
-}
+} // Keys namespace
+} // JWTXX namespace
+
+#endif // JWTXX_PEMKEY_H

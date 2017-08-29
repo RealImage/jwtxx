@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JWTXX_HMACKEY_H
+#define JWTXX_HMACKEY_H
 
 #include "keyimpl.h"
 #include "utils.h"
@@ -53,5 +54,7 @@ class HMAC : public Key::Impl
         std::string m_data;
 };
 
-}
-}
+} // Keys namespace
+} // JWTXX namespace
+
+#endif // JWTXX_HMACKEY_H
